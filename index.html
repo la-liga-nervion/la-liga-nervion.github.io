@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Liga Nervión - Liga de fútbol estudiantil del IES Nervión</title>
+  <meta name="description" content="La Liga Nervión: liga de fútbol estudiantil del IES Nervión. Equipos, clasificación y equipo directivo.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#equipos">Saltar al contenido</a>
+
+  <header class="hero" id="inicio">
+    <svg class="pitch" viewBox="0 0 1200 700" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
+      <line x1="0" y1="660" x2="1200" y2="660" pathLength="1"/>
+      <line x1="820" y1="-200" x2="820" y2="660" pathLength="1"/>
+      <circle cx="820" cy="350" r="170" pathLength="1"/>
+      <circle class="spot" cx="820" cy="350" r="9"/>
+    </svg>
+    <svg class="pitch pitch--mobile" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <line x1="0" y1="660" x2="600" y2="660" pathLength="1"/>
+      <line x1="300" y1="-200" x2="300" y2="660" pathLength="1"/>
+      <circle cx="300" cy="350" r="170" pathLength="1"/>
+      <circle class="spot" cx="300" cy="350" r="9"/>
+    </svg>
+
+    <div class="wrap hero-inner">
+      <nav class="nav" aria-label="Principal">
+        <ul class="nav-links">
+          <li><a href="#equipos">Equipos</a></li>
+          <li><a href="#clasificacion">Clasificación</a></li>
+          <li><a href="#directiva">Directiva</a></li>
+        </ul>
+      </nav>
+
+      <div class="hero-body">
+        <h1>La Liga<br>Nervión</h1>
+        <p class="hero-sub">Liga de fútbol estudiantil del IES Nervión.</p>
+        <p class="hero-status" id="hero-status">Cargando la clasificación…</p>
+        <div class="hero-actions">
+          <a class="btn btn-yellow" href="#clasificacion">Ver clasificación</a>
+          <a class="link-light" href="#equipos">Conocer los equipos</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="equipos" aria-labelledby="h-equipos">
+      <div class="wrap">
+        <h2 id="h-equipos">Equipos</h2>
+        <p class="section-intro">Los equipos que compiten en la liga. Pulsa uno para ver su fila en la clasificación.</p>
+        <ul class="team-grid" id="team-grid">
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-table" id="clasificacion" aria-labelledby="h-clasificacion">
+      <div class="wrap">
+        <h2 id="h-clasificacion">Tabla de participación</h2>
+        <p class="section-intro">Puntos de cada equipo en la competición.</p>
+
+        <div class="table-panel">
+          <div class="table-scroll">
+            <table id="standings">
+              <caption class="visually-hidden">Clasificación de La Liga Nervión</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-pos"><abbr title="Posición">Pos</abbr></th>
+                  <th scope="col" class="col-team">Equipo</th>
+                  <th scope="col" class="num col-pts"><abbr title="Puntos">Pts</abbr></th>
+                </tr>
+              </thead>
+              <tbody id="standings-body">
+                <tr><td colspan="3" class="loading">Cargando clasificación…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="legend">
+          Los equipos se ordenan por puntos: 3 por victoria y 1 por empate. Si dos equipos tienen los mismos puntos, comparten puesto.
+        </p>
+      </div>
+    </section>
+
+        <section class="section section-join" id="crear-equipo" aria-labelledby="h-crear">
+      <div class="wrap join">
+        <div class="join-intro">
+          <h2 id="h-crear">Crea tu equipo</h2>
+          <p class="section-intro">
+            La liga está abierta a nuevos equipos, pero solo pueden formarlos alumnos del instituto.
+          </p>
+        </div>
+
+        <div class="join-body">
+          <p class="join-lead">Para crear un equipo tienes que cumplir estos dos requisitos:</p>
+          <ul class="requirements">
+            <li>Estar en el IES Nervión.</li>
+            <li>Cursar la ESO.</li>
+          </ul>
+          <p>
+            Si los cumples, escríbenos por mensaje directo en Instagram e indícanos tu nombre,
+            tu curso y el nombre que quieres para tu equipo.
+          </p>
+          <p class="join-action">
+            <a class="btn btn-yellow" href="https://www.instagram.com/la.liga.nervion/" target="_blank" rel="noopener noreferrer">Escribirnos por Instagram<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>
+          </p>
+          <p class="join-handle">Nos encontrarás como <strong>@la.liga.nervion</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="directiva" aria-labelledby="h-directiva">
+      <div class="wrap">
+        <h2 id="h-directiva">Equipo directivo</h2>
+        <p class="section-intro">Quienes organizan y arbitran la liga.</p>
+
+        <div class="council">
+          <p class="council-tab">Consejo Arbitral General</p>
+          <ul class="council-list">
+            <li>
+              <h3>Alexis</h3>
+              <p>Árbitro y fundador</p>
+            </li>
+            <li>
+              <h3>Alejandro F.</h3>
+              <p>Secretario de organización</p>
+            </li>
+            <li>
+              <h3>Alejandro G.</h3>
+              <p>Árbitro segundo</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="legal" aria-labelledby="h-legal">
+    <div class="wrap">
+      <h2 id="h-legal">Información legal</h2>
+      <p>
+        La Liga Nervión es una competición de fútbol estudiantil del IES Nervión. No está afiliada,
+        patrocinada ni respaldada de ninguna forma por LALIGA, y no utiliza ninguna de sus marcas
+        registradas, nombres comerciales ni logotipos.
+      </p>
+      <p>
+        Los nombres de los equipos que aparecen en esta web son creaciones propias de la liga Nervión.
+      </p>
+      <p class="footer-line">La Liga Nervión. Liga de fútbol estudiantil del IES Nervión, Sevilla.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
