@@ -31,6 +31,12 @@
     return Number.isFinite(n) && n > 0 ? n : 0;
   };
 
+  // La diferencia de goles puede ser negativa: admite "-2", "+3" y el signo menos tipográfico
+  const toGoalDiff = v => {
+    const n = Number.parseInt(String(v).replace('\u2212', '-'), 10);
+    return Number.isFinite(n) ? n : 0;
+  };
+
   const nameFromKey = key =>
     key.split(/[-_\s]+/).filter(Boolean)
       .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
@@ -114,27 +120,36 @@
         siglas: teamInitials(nombre),
         color: teamColor(clave, pick(rec, 'color')),
         pts: toPoints(pick(rec, 'pts', 'puntos')),
+        dg: toGoalDiff(pick(rec, 'dg', 'diferencia', 'diferencia de goles')),
       });
     });
     return teams;
   }
 
+  // Orden: 1.º puntos, 2.º diferencia de goles, 3.º orden alfabético
   function buildStandings(teams) {
-    const table = teams.map(team => ({ team, pts: team.pts }));
+    const table = teams.map(team => ({ team, pts: team.pts, dg: team.dg }));
 
     table.sort((x, y) =>
-      y.pts - x.pts || x.team.nombre.localeCompare(y.team.nombre, 'es')
+      y.pts - x.pts ||
+      y.dg - x.dg ||
+      x.team.nombre.localeCompare(y.team.nombre, 'es')
     );
 
-    // Los equipos con los mismos puntos comparten puesto
+    // Solo comparten puesto los equipos empatados en puntos Y en diferencia de goles
     table.forEach((row, i) => {
-      row.rank = i > 0 && row.pts === table[i - 1].pts ? table[i - 1].rank : i + 1;
+      const prev = table[i - 1];
+      row.rank = prev && row.pts === prev.pts && row.dg === prev.dg ? prev.rank : i + 1;
     });
 
     return table;
   }
 
   /* ---------- Dibujo ---------- */
+
+  // Mientras nadie tenga puntos, no hay clasificación: en vez de un "1" para todos se muestra un guion
+  const notStarted = () => state.table.every(r => r.pts === 0);
+  const rankLabel = row => (notStarted() ? '\u2013' : String(row.rank));
 
   // Solo hay líder destacado si un único equipo va primero y tiene puntos
   function soleLeader() {
@@ -156,10 +171,10 @@
                 data-clave="${escapeHtml(team.clave)}" data-siglas="${escapeHtml(team.siglas)}"
                 style="--tile:${team.color}"
                 aria-pressed="${state.selected === team.clave}"
-                aria-label="${nombre}, puesto ${row.rank}, ${row.pts} puntos${isLeader ? ', líder de la liga' : ''}. Ver en la clasificación.">
+                aria-label="${nombre}, ${notStarted() ? 'sin puesto todavía' : 'puesto ' + row.rank}, ${row.pts} puntos${isLeader ? ', líder de la liga' : ''}. Ver en la clasificación.">
           <span class="tile-name">${nombre}</span>
           <span class="tile-stats">
-            <span>Puesto ${row.rank}</span>
+            <span>Puesto ${rankLabel(row)}</span>
             <span>${row.pts} ${row.pts === 1 ? 'punto' : 'puntos'}</span>
           </span>
         </button>
@@ -169,7 +184,7 @@
 
   function renderTable() {
     if (!state.table.length) {
-      els.body.innerHTML = '<tr><td colspan="3" class="loading">La clasificación no está disponible en este momento. Vuelve a intentarlo más tarde.</td></tr>';
+      els.body.innerHTML = '<tr><td colspan="4" class="loading">La clasificación no está disponible en este momento. Vuelve a intentarlo más tarde.</td></tr>';
       return;
     }
     const anyPoints = state.table.some(r => r.pts > 0);
@@ -178,8 +193,9 @@
       const classes = [leader ? 'is-leader' : '', state.selected === r.team.clave ? 'is-focus' : '']
         .filter(Boolean).join(' ');
       return `<tr data-clave="${escapeHtml(r.team.clave)}" class="${classes}" style="--team:${r.team.color}">
-        <td class="col-pos"><span class="rank">${r.rank}</span></td>
+        <td class="col-pos"><span class="rank">${rankLabel(r)}</span></td>
         <td class="col-team">${escapeHtml(r.team.nombre)}</td>
+        <td class="col-dg">${r.dg > 0 ? '+' + r.dg : r.dg}</td>
         <td class="col-pts">${r.pts}</td>
       </tr>`;
     }).join('');
