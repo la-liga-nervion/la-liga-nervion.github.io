@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link rel="canonical" href="https://la-liga-nervion.github.io/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>La Liga Nervión - Liga de fútbol estudiantil del IES Nervión</title>
-  <link rel="canonical" href="https://la-liga-nervion.github.io/">
   <meta name="description" content="La Liga Nervión: liga de fútbol estudiantil del IES Nervión. Equipos, clasificación y equipo directivo.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,7 +64,7 @@
     <section class="section section-table" id="clasificacion" aria-labelledby="h-clasificacion">
       <div class="wrap">
         <h2 id="h-clasificacion">Tabla de participación</h2>
-        <p class="section-intro">Puntos de cada equipo en la competición.</p>
+        <p class="section-intro">Puntos y diferencia de goles de cada equipo en la competición.</p>
 
         <div class="table-panel">
           <div class="table-scroll">
@@ -76,18 +74,20 @@
                 <tr>
                   <th scope="col" class="col-pos"><abbr title="Posición">Pos</abbr></th>
                   <th scope="col" class="col-team">Equipo</th>
+                  <th scope="col" class="num"><abbr title="Diferencia de goles">DG</abbr></th>
                   <th scope="col" class="num col-pts"><abbr title="Puntos">Pts</abbr></th>
                 </tr>
               </thead>
               <tbody id="standings-body">
-                <tr><td colspan="3" class="loading">Cargando clasificación…</td></tr>
+                <tr><td colspan="4" class="loading">Cargando clasificación…</td></tr>
               </tbody>
             </table>
           </div>
         </div>
 
         <p class="legend">
-          Los equipos se ordenan por puntos: 3 por victoria y 1 por empate. Si dos equipos tienen los mismos puntos, comparten puesto.
+          Los equipos se ordenan por puntos: 3 por victoria y 1 por empate. En caso de empate a puntos, decide la
+          diferencia de goles. Si también coincide, comparten puesto y se ordenan alfabéticamente.
         </p>
       </div>
     </section>
@@ -154,7 +154,7 @@
         registradas, nombres comerciales ni logotipos.
       </p>
       <p>
-        Los nombres de los equipos que aparecen en esta web son creaciones propias de la liga Nervión.
+        Los nombres de los equipos y los escudos que aparecen en esta web son creaciones propias de la liga.
       </p>
       <p class="footer-line">La Liga Nervión. Liga de fútbol estudiantil del IES Nervión, Sevilla.</p>
     </div>
